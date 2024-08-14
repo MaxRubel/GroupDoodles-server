@@ -30,13 +30,18 @@ class DoodleView(ViewSet):
         joined_doodles = user.doodles.all()
 
         yours_serializer = DoodleSerializerSmall(your_doodles, many=True)
-        theirs_serializer = DoodleSerializerSmall(joined_doodles = user.doodles.all(), many=True)
+        others_serializer = DoodleSerializerSmall(joined_doodles, many=True)
         
         return Response({
             "yourDoodles": yours_serializer.data,
-            "theirDoodles": theirs_serializer.data
+            "otherDoodles": others_serializer.data
             },
             status=status.HTTP_200_OK)
+        
+    def retrieve(self, request, pk):
+        doodle = Doodle.objects.get(pk=pk)
+        serialzer = DoodleSerializer(doodle)
+        return Response(serialzer.data, status=status.HTTP_200_OK)
 
     def create(self, request):
         """
