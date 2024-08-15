@@ -1,0 +1,1 @@
+DELETE FROM groupdoodles_api_doodle WHERE ID > 0

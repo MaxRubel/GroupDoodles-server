@@ -17,7 +17,7 @@ class DoodleSerializer(serializers.ModelSerializer):
 class DoodleSerializerSmall(serializers.ModelSerializer):
     class Meta:
         model = Doodle
-        fields = ["owner", "name", "date_created", "collaborators"]
+        fields = ["id","owner", "name", "date_created", "collaborators"]
         depth = 1
 
 class DoodleView(ViewSet):
