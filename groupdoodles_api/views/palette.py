@@ -24,7 +24,7 @@ class PaletteView(ViewSet):
         palettes = Palette.objects.filter(owner=user)
         serializer = PaletteSerializer(palettes, many=True)
 
-        return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=['get'], url_path='get_liked_palettes' )
     def get_liked_palettes(self, request):
