@@ -13,6 +13,7 @@ class PaletteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Palette
         fields = "__all__"
+        depth= 1
 
 class PaletteView(ViewSet):
     
@@ -52,7 +53,6 @@ class PaletteView(ViewSet):
             colors = request.data["colors"],
         )
         serializer = PaletteSerializer(palette)
-        print(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
     def update(self, request, pk):
