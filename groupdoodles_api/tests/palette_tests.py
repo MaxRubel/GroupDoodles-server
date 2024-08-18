@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
-from groupdoodles_api.models import User, Palette
+from groupdoodles_api.models import User, Palette, PaletteLike
 from groupdoodles_api.views import PaletteSerializer
 from datetime import date
 import random
@@ -12,16 +12,24 @@ class PaletteTestCase(TestCase):
     
     def setUp(self):
 
-       self.user_data = {
+        self.user_data = {
             "username" : "testuser",
             "uid" : "testuid123",
             "email" : "test@example.com",
             "date_registered": self.date_now()
        }
 
-       self.user = User.objects.create(**self.user_data)     
+        self.collab_data = {
+            "username" : "collab",
+            "uid" : "testuid123",
+            "email" : "collab_test@example.com",
+            "date_registered" :self.date_now()
+       }
 
-       self.palette_data = {
+        self.user = User.objects.create(**self.user_data)   
+        self.collab = User.objects.create(**self.collab_data)  
+
+        self.palette_data = {
             "name": "testpalette",
             "owner": self.user,
             "colors": [1,2,3,4,5,6,7,8,9],
@@ -91,3 +99,67 @@ class PaletteTestCase(TestCase):
 
         response = self.client.get(reverse("palette-list"))
         self.assertEqual(len(response.data), 50)
+
+    def test_get_the_palletes_youve_liked(self):
+
+        palette_objects = []
+        for i in range(20):
+            palette = Palette.objects.create(
+                owner= self.collab,
+                name= "likedPaletteTest",
+                colors= [1,2,3,4], 
+            )
+            palette_objects.append(palette)
+
+        for i in range (15):
+                PaletteLike.objects.create(
+                    palette = palette_objects[i],
+                    user = self.user
+                )
+        
+        url = reverse('palette-get-liked-palettes')
+        url += f'?user_id={self.user.id}'
+        response = self.client.get(url)
+        self.assertEqual(len(response.data), 15)
+
+    def test_palette_like(self):
+        palette = Palette.objects.create(**self.palette_data)
+        
+        collab_data = {
+            "user_id": self.collab.id,
+            "palette_id":palette.id
+        }
+
+        url = reverse("palette_like-like-palette")
+        response = self.client.post(url, data=json.dumps(collab_data), content_type='application/json')
+        self.assertEqual(response.status_code, 201)
+
+        #remove old like
+        response = self.client.post(url, data=json.dumps(collab_data), content_type='application/json')
+        self.assertEqual(response.status_code, 201)
+
+        #liking your own palette
+        bad_collab_data = {
+            "user_id": self.user.id,
+            "palette_id": palette.id
+        }
+        response = self.client.post(url, data=json.dumps(bad_collab_data), content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data, {"error": "This is your own palette"})
+
+        #user doesn't exist
+        bad_collab_data = {
+            "user_id": 3000,
+            "palette_id": palette.id
+        }
+        response = self.client.post(url, data=json.dumps(bad_collab_data), content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data, {"error": "User does not exist"})
+
+        bad_collab_data = {
+            "user_id": self.collab.id,
+            "palette_id": 3000
+        }
+        response = self.client.post(url, data=json.dumps(bad_collab_data), content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data, {"error": "Palette does not exist"})

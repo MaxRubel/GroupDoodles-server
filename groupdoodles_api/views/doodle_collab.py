@@ -37,9 +37,6 @@ class DoodleCollabView(ViewSet):
         
     @action(detail=False, methods=['post'], url_path='remove_doodle_collab' )
     def remove_doodle_collab(self, request):
-        
-        doodle = Doodle.objects.get(pk=request.data['doodle_id'])
-        collab = User.objects.get(pk=request.data['user_id'])
 
         try:
             doodle = Doodle.objects.get(pk=request.data['doodle_id'])
@@ -48,7 +45,7 @@ class DoodleCollabView(ViewSet):
             doodleCollab = DoodleCollab.objects.filter(doodle=doodle, collab=collab)
             doodleCollab.delete()
 
-            return Response(status=status.HTTP_201_CREATED)
+            return Response(status=status.HTTP_204_NO_CONTENT)
         
         except User.DoesNotExist:
             return Response(
