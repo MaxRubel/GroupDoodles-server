@@ -4,7 +4,6 @@ from groupdoodles_api.models import Doodle, User, DoodleCollab
 from groupdoodles_api.views import DoodleSerializer
 from datetime import date
 import json
-from operator import itemgetter
 
 class DoodleTestCase(TestCase):
     def date_now(self):
