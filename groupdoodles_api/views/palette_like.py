@@ -29,11 +29,11 @@ class PaletteLikeView(ViewSet):
         except User.DoesNotExist:
             return Response(
                 {"error": "User does not exist"},
-                status=status.HTTP_404_NOT_FOUND
+                status=status.HTTP_400_BAD_REQUEST
             )
         except Palette.DoesNotExist:
             return Response(
                 {"error": "Palette does not exist"},
-                status=status.HTTP_404_NOT_FOUND
+                status=status.HTTP_400_BAD_REQUEST
             )
         
