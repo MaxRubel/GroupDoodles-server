@@ -20,6 +20,7 @@ class DoodleTestCase(TestCase):
        }
 
        self.user =User.objects.create(**self.user_data)     
+
        self.doodle_data = {
             "name": "testdoodle",
             "owner": self.user,
@@ -37,7 +38,7 @@ class DoodleTestCase(TestCase):
        }
 
         response = self.client.post(reverse('doodle-list'), data=json.dumps(doodle_data), content_type='application/json')
-        self.assertEqual(response.status_code,201)
+        self.assertEqual(response.status_code, 201)
         doodle = Doodle.objects.get(pk=1)
 
         serializer = DoodleSerializer(doodle)
@@ -50,7 +51,6 @@ class DoodleTestCase(TestCase):
         self.assertEqual(response.data['data'],  {"rectangles": [1,2,3], "image": "12313123123123123123123123123123"})
 
     def test_update_doodle(self):
-        User.objects.create(**self.user_data)
         doodle = Doodle.objects.create(**self.doodle_data)
         update_data = {
             "user_id": 1,
@@ -87,5 +87,10 @@ class DoodleTestCase(TestCase):
         response = self.client.get(url)
         response_doodles = response.data['yourDoodles']
         self.assertEqual(len(response_doodles), len(doodles))
+
+    def test_delete_doodle(self):
+        doodle = Doodle.objects.create(**self.doodle_data)
+        response = self.client.delete(reverse('doodle-detail', args=[doodle.id]))
+        self.assertEqual(response.status_code, 204)
 
 
