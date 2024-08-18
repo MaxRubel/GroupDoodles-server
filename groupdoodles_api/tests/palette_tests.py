@@ -3,7 +3,6 @@ from django.urls import reverse
 from groupdoodles_api.models import User, Palette, PaletteLike
 from groupdoodles_api.views import PaletteSerializer
 from datetime import date
-import random
 import json
 
 class PaletteTestCase(TestCase):
