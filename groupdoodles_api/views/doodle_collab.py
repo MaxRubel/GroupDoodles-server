@@ -23,7 +23,7 @@ class DoodleCollabView(ViewSet):
                 collab = collab
             )
 
-            return Response(status=status.HTTP_201_CREATED)
+            return Response({"success":"collab created"}, status=status.HTTP_201_CREATED)
         except User.DoesNotExist:
             return Response(
                 {"error": "User does not exist"},

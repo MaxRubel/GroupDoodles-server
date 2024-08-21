@@ -13,7 +13,7 @@ class DoodleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doodle
         fields = "__all__"
-
+        depth = 1
 class DoodleSerializerSmall(serializers.ModelSerializer):
     class Meta:
         model = Doodle
