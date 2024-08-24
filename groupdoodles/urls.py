@@ -15,10 +15,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from rest_framework.routers import DefaultRouter
 from django.conf.urls import include
 from groupdoodles_api.views import check_user, UserView, DoodleView, PaletteView, DoodleCollabView, PaletteLikeView
+from groupdoodles_api import consumers
 
 router = DefaultRouter(trailing_slash=False)
 
@@ -32,4 +33,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('checkuser', check_user, name='check_user'),
+]
+
+websocket_urlpatterns = [
+    re_path(r'ws/signalling', consumers.SignallingSocketConsumer.as_asgi())
 ]
