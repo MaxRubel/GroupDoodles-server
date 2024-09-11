@@ -31,9 +31,7 @@ CORS_ORIGIN_WHITELIST = ['*']
 
 # SECURITY WARNING: don't run with debug turned on in production
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
+CORS_ALLOWED_ORIGINS = ['*']
 
 # Application definition
 
