@@ -7,6 +7,11 @@ name = "pypi"
 django = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
+gunicorn = "*"
+django-environ = "*"
+dj-database-url = "*"
+whitenoise = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
