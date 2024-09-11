@@ -1,8 +1,10 @@
 # GroupDoodles-server
 Group-doodles is a collaborative drawing application built with Django, designed to bring together artists and doodlers in a shared creative space.
-Overview
+
+## Overview
 Group-doodles provides a platform where users can create, share, and collaborate on digital drawings. The app combines the fun of casual doodling with the power of group creativity, allowing multiple users to contribute to a single piece of art.
-Key Features
+
+## Key Features
 
 Collaborative Drawing: Users can create new drawings or join existing ones, working together in real-time to create unique artworks.
 User Profiles: Each user has a profile where they can showcase their contributions and favorite pieces.
@@ -11,7 +13,7 @@ Drawing Management: Create, edit, and delete drawings. Users can also browse thr
 Version History: Each drawing maintains a history of changes, allowing users to review the evolution of the artwork or revert to previous versions.
 Social Features: Users can like, comment on, and share drawings, fostering a community of artists and enthusiasts.
 
-How It Works
+## How It Works
 
 Sign Up and Profile Creation: New users can create an account and set up their profile, customizing their avatar and bio.
 Start or Join a Drawing: Users can initiate a new drawing or browse existing ones to join.
@@ -20,14 +22,14 @@ Real-time Collaboration: When multiple users work on the same drawing, changes a
 Save and Share: Completed drawings can be saved, shared on the platform, or exported for use elsewhere.
 Explore and Interact: Users can browse the gallery of public drawings, leave comments, and like their favorite pieces.
 
-Technical Details
+## Technical Details
 
 Built with Django, leveraging its robust ORM for managing complex data relationships
 Uses PostgreSQL for efficient data storage and retrieval
 Implements WebSocket technology for real-time drawing updates
 Responsive design ensures a seamless experience across desktop and mobile devices
 
-Models
+## Models
 The application is structured around four main models:
 
 Users: Stores user account information and preferences.
