@@ -30,13 +30,6 @@ CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST")
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
 
 # Application definition
 
