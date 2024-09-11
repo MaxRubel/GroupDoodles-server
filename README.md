@@ -1,4 +1,4 @@
-# GroupDoodles-server
+# Group-Doodles Server
 Group-doodles is a collaborative drawing application built with Django, designed to bring together artists and doodlers in a shared creative space.
 
 ## Overview
