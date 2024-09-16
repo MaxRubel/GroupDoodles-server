@@ -28,6 +28,9 @@ CSRF_TRUSTED_ORIGINS=env.list('CSRF_TRUSTED_ORIGINS')
 CORS_ALLOWED_ORIGINS = [
     "https://paint-ts.netlify.app",
 ]
+CSRF_TRUSTED_ORIGINS = [
+   "https://paint-ts.netlify.app",
+]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
