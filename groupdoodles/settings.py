@@ -24,13 +24,7 @@ env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = env.bool("DEBUG")
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
-# CSRF_TRUSTED_ORIGINS=env.list('CSRF_TRUSTED_ORIGINS')
-CORS_ALLOWED_ORIGINS = [
-    "https://paint-ts.netlify.app",
-]
-CSRF_TRUSTED_ORIGINS = [
-   "https://paint-ts.netlify.app",
-]
+CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
